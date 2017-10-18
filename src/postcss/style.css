@@ -1,0 +1,38 @@
+$contentHeight: 20vh;
+
+body {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	background: black;
+	& div {
+		$imgMargin: 0.4rem;
+		&.content {
+			height: calc($contentHeight + 2 * $imgMargin);
+			overflow-x: scroll;
+			margin: calc(0.5 * $imgMargin);
+			display: flex;
+			& img {
+				padding: calc(0.5 * $imgMargin);
+				height: calc(100% - $imgMargin);
+			}
+		}
+		&.mirror {
+			background: black;
+			& video {
+				width: 100%;
+				transform: scaleX(-1);
+				vertical-align: bottom;
+			}
+		}
+		&.touch {
+			flex-grow: 1;
+			background: gray;
+			overflow-x: auto;
+			&.pressed {
+				background: lightgray;
+			}
+		}
+	}
+}
