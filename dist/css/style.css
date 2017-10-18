@@ -29,6 +29,7 @@ body div.mirror {
 }
 body div.mirror video {
 	width: 100%;
+	max-height: 50vh;
 	-webkit-transform: scaleX(-1);
 	        transform: scaleX(-1);
 	vertical-align: bottom;
