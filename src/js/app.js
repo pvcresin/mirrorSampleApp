@@ -1,3 +1,5 @@
+import 'webrtc-adapter'
+
 console.log('hello')
 
 let previousTouchX = -1
@@ -22,7 +24,10 @@ touchArea.addEventListener('touchend', e => {
 
 const video = document.querySelector('video')
 navigator.getUserMedia(
-	{video: true, audio: false},
+	{
+		video: true,
+		audio: false
+	},
 	stream => {
 		video.src = window.URL.createObjectURL(stream)
 	},

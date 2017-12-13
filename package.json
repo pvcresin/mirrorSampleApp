@@ -14,7 +14,8 @@
     "postcss-import": "^10.0.0",
     "postcss-simple-vars": "^4.1.0",
     "pug-cli": "^1.0.0-alpha6",
-    "webpack": "^3.4.1"
+    "webpack": "^3.4.1",
+    "webrtc-adapter": "^6.0.3"
   },
   "dependencies": {},
   "scripts": {
