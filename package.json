@@ -23,14 +23,20 @@
     "webpack": "^3.4.1"
   },
   "dependencies": {
+    "hammerjs": "^2.0.8",
     "riot": "^3.7.4",
+    "screenfull": "^3.3.2",
+    "swiper": "^4.0.7",
     "webrtc-adapter": "^6.0.3"
   },
   "scripts": {
+    "copy": "copy mirror.svg dist",
+    "prebuild": "npm run copy",
     "build": "npm-run-all build:*",
     "build:js": "webpack",
     "build:pug": "pug src/index.pug -o dist/ -P",
     "build:postcss": "postcss src/*.css -d dist/ --no-map -u postcss-import postcss-simple-vars postcss-cssnext",
+    "prewatch": "npm run copy",
     "watch": "npm-run-all -p watch:*",
     "watch:js": "npm run build:js -- -w",
     "watch:pug": "npm run build:pug -- -w",
