@@ -61,7 +61,10 @@ App
 			.overlaySlider
 				.mirrorIcon
 					.mirror
-				.sliderBox(ref='sliderBox' touchmove='{touchmove}')
+				.sliderBox(ref='sliderBox'
+					touchstart='{changeProgress}'
+					touchmove='{changeProgress}'
+					touchend='{changeProgress}')
 					.slider
 						.bar
 							.progress(ref='progress')
@@ -172,7 +175,6 @@ App
 			this.currentPage = this.PAGE.TOP
 		}
 		discard(e) {
-			console.log('discard')
 			this.currentPage = this.PAGE.TOP
 		}
 		getVideos() {
@@ -186,7 +188,7 @@ App
 			return `${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}`
 		}
 		getSelectedVideoSrc() {
-			return `/videos/${this.list[this.currentListIndex].filename}`
+			return `${this.list[this.currentListIndex].filename}`
 		}
 		open(e) {
 			this.getVideos().then(videos => {
@@ -236,7 +238,7 @@ App
 			console.log('back')
 			this.currentPage = this.PAGE.SELECT
 		}
-		touchmove(e) {
+		changeProgress(e) {
 			const rect = this.refs.sliderBox.getBoundingClientRect()
 			const dx = e.touches[0].clientX - rect.left
 			let ratio = dx / rect.width

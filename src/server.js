@@ -2,8 +2,14 @@ import fs from 'fs'
 import express from 'express'
 import multer from 'multer'
 import moment from 'moment'
+import https from 'https'
 
 moment.locale('ja')
+
+const options = {
+	pfx: fs.readFileSync("../test.pfx"),
+	passphrase: "0000"
+}
 
 const getDate = filename => {
 	const array = filename.replace('.webm', '').split('-')
@@ -18,7 +24,7 @@ const getDate = filename => {
 }
 
 const app = express()
-const storagePath = 'public/videos'
+const storagePath = 'videos'
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, storagePath)
@@ -32,6 +38,7 @@ const upload = multer({ storage: storage })
 
 app
 	.use(express.static('public'))
+	.use(express.static(storagePath))
 	.get('/', (req, res, next) => {
 		res.send('Hello')
 	})
@@ -58,6 +65,10 @@ app
 			}))
 		})
 	})
-	.listen(3000, () => {
-		console.log("URL -> http://localhost:3000")
-	})
+// .listen(3000, () => {
+// 	console.log("URL -> localhost:3000")
+// })
+
+https.createServer(options, app).listen(3000, () => {
+	console.log("URL -> localhost:3000")
+})

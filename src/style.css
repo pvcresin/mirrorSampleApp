@@ -1,4 +1,4 @@
-$controlAreaHeight: 14rem;
+$controlAreaHeight: 10rem;
 $controlAreaPaddingSide: 0.5rem;
 $toolbarHeight: 4rem;
 
@@ -24,10 +24,16 @@ body {
 			display: flex;
 			& .mirrorVideo {
 				flex-grow: 1;
+				flex-shrink: 1;
 				max-width: 100%;
+				max-height: calc(100vh - $controlAreaHeight);
 				transform: scaleX(-1);
 			}
 			& .playingVideo {
+				flex-grow: 1;
+				flex-shrink: 1;
+				max-width: 100%;
+				max-height: calc(100vh - $controlAreaHeight);
 				position: absolute;
 				top: 0;
 				left: 0;

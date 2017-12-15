@@ -86,9 +86,18 @@ var _moment = __webpack_require__(4);
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _https = __webpack_require__(5);
+
+var _https2 = _interopRequireDefault(_https);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _moment2.default.locale('ja');
+
+const options = {
+	pfx: _fs2.default.readFileSync("../test.pfx"),
+	passphrase: "0000"
+};
 
 const getDate = filename => {
 	const array = filename.replace('.webm', '').split('-');
@@ -103,7 +112,7 @@ const getDate = filename => {
 };
 
 const app = (0, _express2.default)();
-const storagePath = 'public/videos';
+const storagePath = 'videos';
 const storage = _multer2.default.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, storagePath);
@@ -115,7 +124,7 @@ const storage = _multer2.default.diskStorage({
 });
 const upload = (0, _multer2.default)({ storage: storage });
 
-app.use(_express2.default.static('public')).get('/', (req, res, next) => {
+app.use(_express2.default.static('public')).use(_express2.default.static(storagePath)).get('/', (req, res, next) => {
 	res.send('Hello');
 }).get('/delete', (req, res, next) => {
 	_fs2.default.readdir(storagePath, (err, files) => {
@@ -137,8 +146,13 @@ app.use(_express2.default.static('public')).get('/', (req, res, next) => {
 			};
 		}));
 	});
-}).listen(3000, () => {
-	console.log("URL -> http://localhost:3000");
+});
+// .listen(3000, () => {
+// 	console.log("URL -> localhost:3000")
+// })
+
+_https2.default.createServer(options, app).listen(3000, () => {
+	console.log("URL -> localhost:3000");
 });
 
 /***/ }),
@@ -164,6 +178,12 @@ module.exports = require("multer");
 /***/ (function(module, exports) {
 
 module.exports = require("moment");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("https");
 
 /***/ })
 /******/ ]);

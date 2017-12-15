@@ -46,6 +46,6 @@
     "watch:js": "npm run build:js -- -w",
     "watch:pug": "npm run build:pug -- -w",
     "watch:postcss": "npm run build:postcss -- -w",
-    "watch:node": "nodemon dist/server.js"
+    "start": "nodemon dist/server.js"
   }
 }
