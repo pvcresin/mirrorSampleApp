@@ -1,10 +1,11 @@
 const webpack = require('webpack')
 const path = require('path')
+const nodeExternals = require('webpack-node-externals')
 
-module.exports = {
+module.exports = [{
 	entry: path.join(__dirname, 'src/index.js'),
 	output: {
-		path: path.join(__dirname, 'dist/'),
+		path: path.join(__dirname, 'public/'),
 		filename: 'index.js'
 	},
 	module: {
@@ -53,4 +54,24 @@ module.exports = {
 		// 	mangle: true
 		// })
 	]
-}
+}, {
+	entry: __dirname + '/src/server.js',
+	output: {
+		path: __dirname + '/dist/',
+		filename: 'server.js'
+	},
+	module: {
+		loaders: [{
+			test: /\.js$/,
+			exclude: /node_modules/,
+			loader: 'babel-loader',
+			query: {
+				presets: ['node6']
+			}
+		}]
+	},
+	target: 'node',
+	externals: [
+		nodeExternals()
+	]
+}]

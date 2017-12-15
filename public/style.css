@@ -76,6 +76,11 @@ body main .controlArea .toolbar > div.selectView .videoContainer {
 	display: -ms-flexbox;
 	display: flex;
 }
+body main .controlArea .toolbar > div.selectView .videoContainer .message {
+	text-align: center;
+	width: 100%;
+	font-size: calc(8.57143vw - 0.08572rem);
+}
 body main .controlArea .toolbar > div.selectView .videoContainer > video {
 	height: 100%;
 	background: gray;
@@ -84,8 +89,11 @@ body main .controlArea .toolbar > div.selectView .videoContainer .info {
 	-webkit-box-flex: 1;
 	    -ms-flex-positive: 1;
 	        flex-grow: 1;
-	margin: auto 16px;
-	margin: auto 1rem;
+	margin: auto 4.8px;
+	margin: auto 0.3rem;
+}
+body main .controlArea .toolbar > div.selectView .videoContainer .info p {
+	text-align: center;
 }
 body main .controlArea .toolbar > div.overlaySlider {
 	width: calc(71.42855vw - 0.7143rem);

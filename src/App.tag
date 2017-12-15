@@ -37,13 +37,13 @@ App
 				.iconBox
 					i.fa.fa-chevron-circle-left(aria-hidden='true')
 			.selectView(if='{list.length === 0}')
-				.videoContainer(ref='videoContainer') no video
+				.videoContainer(ref='videoContainer')
+					.message No Video...
 			.selectView(if='{list.length > 0}' click='{mirror}')
 				.videoContainer(ref='videoContainer')
-					video
+					video(src='{getSelectedVideoSrc()}')
 					.info
-						p 撮影日
-						p 2017.12.16
+						p {this.getDate()}
 			.right(if='{existNext()}' ref='right' click='{right}')
 				.iconBox
 					i.fa.fa-chevron-circle-right(aria-hidden='true')
@@ -89,6 +89,9 @@ App
 			NEXT: 1
 		}
 		this.currentPage = this.PAGE.TOP
+		this.recorder
+		this.video
+		this.selected
 		this.isFullscreen = false
 		this.isSwipeListener = false
 		this.list = []
@@ -103,6 +106,10 @@ App
 				{ video: true, audio: false },
 				stream => {
 					video.srcObject = stream
+					this.recorder = new MediaRecorder(stream)
+					this.recorder.ondataavailable = e => {
+						this.video = new File([e.data], 'mirror.webm',{ type: e.data.type })
+					}
 				},
 				err => {
 					alert(err)
@@ -138,34 +145,63 @@ App
 		}
 		startRecording(e) {
 			console.log('rec')
+			this.recorder.start()
 			this.currentPage = this.PAGE.REC
 		}
 		stopRecording(e) {
 			console.log('stop')
+			this.recorder.stop()
 			this.currentPage = this.PAGE.CONFIRM
 		}
+		upload(file) {
+			const url = '/upload'
+			const sendData = new FormData()
+			sendData.append('video', file)
+			return fetch(url, {
+				method: 'POST',
+				body: sendData
+			}).then(response => {
+				return response.text()
+			})
+		}
 		save(e) {
-			console.log('save')
+			this.upload(this.video).then(res => {
+				console.log(res)
+			})
 			this.currentPage = this.PAGE.TOP
 		}
 		discard(e) {
 			console.log('discard')
 			this.currentPage = this.PAGE.TOP
 		}
+		getVideos() {
+			const url = '/list'
+			return fetch(url).then(response => {
+				return response.json()
+			})
+		}
+		getDate() {
+			const d = this.list[this.currentListIndex].date
+			return `${d.year}/${d.month}/${d.day} ${d.hour}:${d.minute}`
+		}
+		getSelectedVideoSrc() {
+			return `/videos/${this.list[this.currentListIndex].filename}`
+		}
 		open(e) {
-			console.log('open')
-			this.currentPage = this.PAGE.SELECT
-			const videos = this.getVideos()
-			if (videos.length === 0) {
-				this.list = []
-				this.currentListIndex = -1
-			} else {
-				this.list = videos
-				this.currentListIndex = 0
-			}
+			this.getVideos().then(videos => {
+				console.log(videos)
+				this.currentPage = this.PAGE.SELECT
+				if (videos.length === 0) {
+					this.list = []
+					this.currentListIndex = -1
+				} else {
+					this.list = videos
+					this.currentListIndex = 0
+				}
+				this.update()
+			})
 		}
 		close(e) {
-			console.log('close')
 			this.currentPage = this.PAGE.TOP
 		}
 		left(e) {
@@ -182,10 +218,6 @@ App
 			} else {
 				console.log('unknown direction')
 			}
-		}
-		getVideos() {
-			return [1, 2, 3]
-			//- return []
 		}
 		existPrev() {
 			if (this.list.length <= 1) return false

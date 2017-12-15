@@ -56,13 +56,21 @@ body {
 							height: $unit;
 							background: white;
 							display: flex;
+							& .message {
+								text-align: center;
+								width: 100%;
+								font-size: calc($unit * 0.6);
+							}
 							& > video {
 								height: 100%;
 								background: gray;
 							}
 							& .info {
 								flex-grow: 1;
-								margin: auto 1rem;
+								margin: auto 0.3rem;
+								& p {
+									text-align: center;
+								}
 							}
 						}
 					}
