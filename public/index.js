@@ -3870,7 +3870,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var riot = __webpack_require__(1);
 
-riot.tag2('app', '<div class="viewArea"> <video autoplay="1"></video> </div> <div class="controlArea"> <div class="toolbar" if="{this.currentPage === this.PAGE.TOP}"> <div class="open" click="{open}"> <div class="iconBox"><i class="fa fa-folder" aria-hidden="true"></i></div> </div> <div class="rec" click="{startRecording}"> <div class="iconBox"> <div></div> </div> </div> <div class="full" click="{fullscreen}"> <div class="iconBox"><i class="fa fa-expand" if="{!this.isFullscreen}" aria-hidden="true"></i><i class="fa fa-compress" if="{this.isFullscreen}" aria-hidden="true"></i></div> </div> </div> <div class="toolbar" if="{this.currentPage === this.PAGE.REC}"> <div></div> <div class="stop" click="{stopRecording}"> <div class="iconBox"><i class="fa fa-stop" aria-hidden="true"></i></div> </div> <div></div> </div> <div class="toolbar" if="{this.currentPage === this.PAGE.CONFIRM}"> <div class="save" click="{save}"> <div class="iconBox"><i class="fa fa-floppy-o" aria-hidden="true"></i></div> </div> <div class="discard" click="{discard}"> <div class="iconBox"><i class="fa fa-trash" aria-hidden="true"></i></div> </div> </div> <div class="toolbar" if="{this.currentPage === this.PAGE.SELECT}"> <div class="close" click="{close}"> <div class="iconBox"><i class="fa fa-folder-open" aria-hidden="true"></i></div> </div> <div class="left" if="{existPrev()}" ref="left" click="{left}"> <div class="iconBox"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div> </div> <div class="left" if="{!existPrev()}" disabled="disabled"> <div class="iconBox"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div> </div> <div class="selectView" if="{list.length === 0}"> <div class="videoContainer" ref="videoContainer"> <div class="message">No Video...</div> </div> </div> <div class="selectView" if="{list.length &gt; 0}" click="{mirror}"> <div class="videoContainer" ref="videoContainer"> <video riot-src="{getSelectedVideoSrc()}"></video> <div class="info"> <p>{this.getDate()}</p> </div> </div> </div> <div class="right" if="{existNext()}" ref="right" click="{right}"> <div class="iconBox"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></div> </div> <div class="right" if="{!existNext()}" disabled="disabled"> <div class="iconBox"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></div> </div> </div> <div class="toolbar" if="{this.currentPage === this.PAGE.MIRROR}"> <div class="back" click="{back}"> <div class="iconBox"><i class="fa fa-arrow-left" aria-hidden="true"></i></div> </div> <div class="overlaySlider"> <div class="mirrorIcon"> <div class="mirror"></div> </div> <div class="sliderBox" ref="sliderBox" touchmove="{touchmove}"> <div class="slider"> <div class="bar"> <div class="progress" ref="progress"></div> </div> </div> </div> <div class="videoIcon"><i class="fa fa-film" aria-hidden="true"></i></div> </div> <div class="play" if="{!this.isPlaying}" click="{play}"> <div class="iconBox"><i class="fa fa-play" aria-hidden="true"></i></div> </div> <div class="pause" if="{this.isPlaying}" click="{pause}"> <div class="iconBox"><i class="fa fa-pause" aria-hidden="true"></i></div> </div> </div> </div>', '', '', function (opts) {
+riot.tag2('app', '<div class="viewArea"> <video class="mirrorVideo" autoplay="1"></video> <video class="playingVideo" if="{this.currentPage === this.PAGE.MIRROR}" ref="playingVideo" riot-src="{getSelectedVideoSrc()}"></video> </div> <div class="controlArea"> <div class="toolbar" if="{this.currentPage === this.PAGE.TOP}"> <div class="open" click="{open}"> <div class="iconBox"><i class="fa fa-folder" aria-hidden="true"></i></div> </div> <div class="rec" click="{startRecording}"> <div class="iconBox"> <div></div> </div> </div> <div class="full" click="{fullscreen}"> <div class="iconBox"><i class="fa fa-expand" if="{!this.isFullscreen}" aria-hidden="true"></i><i class="fa fa-compress" if="{this.isFullscreen}" aria-hidden="true"></i></div> </div> </div> <div class="toolbar" if="{this.currentPage === this.PAGE.REC}"> <div></div> <div class="stop" click="{stopRecording}"> <div class="iconBox"><i class="fa fa-stop" aria-hidden="true"></i></div> </div> <div></div> </div> <div class="toolbar" if="{this.currentPage === this.PAGE.CONFIRM}"> <div class="save" click="{save}"> <div class="iconBox"><i class="fa fa-floppy-o" aria-hidden="true"></i></div> </div> <div class="discard" click="{discard}"> <div class="iconBox"><i class="fa fa-trash" aria-hidden="true"></i></div> </div> </div> <div class="toolbar" if="{this.currentPage === this.PAGE.SELECT}"> <div class="close" click="{close}"> <div class="iconBox"><i class="fa fa-folder-open" aria-hidden="true"></i></div> </div> <div class="left" if="{existPrev()}" ref="left" click="{left}"> <div class="iconBox"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div> </div> <div class="left" if="{!existPrev()}" disabled="disabled"> <div class="iconBox"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></div> </div> <div class="selectView" if="{list.length === 0}"> <div class="videoContainer" ref="videoContainer"> <div class="message">No Video...</div> </div> </div> <div class="selectView" if="{list.length &gt; 0}" click="{mirror}"> <div class="videoContainer" ref="videoContainer"> <video riot-src="{getSelectedVideoSrc()}"></video> <div class="info"> <p>{this.getDate()}</p> </div> </div> </div> <div class="right" if="{existNext()}" ref="right" click="{right}"> <div class="iconBox"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></div> </div> <div class="right" if="{!existNext()}" disabled="disabled"> <div class="iconBox"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></div> </div> </div> <div class="toolbar" if="{this.currentPage === this.PAGE.MIRROR}"> <div class="back" click="{back}"> <div class="iconBox"><i class="fa fa-arrow-left" aria-hidden="true"></i></div> </div> <div class="overlaySlider"> <div class="mirrorIcon"> <div class="mirror"></div> </div> <div class="sliderBox" ref="sliderBox" touchmove="{touchmove}"> <div class="slider"> <div class="bar"> <div class="progress" ref="progress"></div> </div> </div> </div> <div class="videoIcon"><i class="fa fa-film" aria-hidden="true"></i></div> </div> <div class="play" if="{!this.isPlaying}" click="{play}"> <div class="iconBox"><i class="fa fa-play" aria-hidden="true"></i></div> </div> <div class="pause" if="{this.isPlaying}" click="{pause}"> <div class="iconBox"><i class="fa fa-pause" aria-hidden="true"></i></div> </div> </div> </div>', '', '', function (opts) {
     var _this = this;
 
     this.PAGE = {
@@ -3897,7 +3897,7 @@ riot.tag2('app', '<div class="viewArea"> <video autoplay="1"></video> </div> <di
     this.on('mount', function () {
         console.log('mounted', opts);
 
-        var video = document.querySelector('video');
+        var video = document.querySelector('.mirrorVideo');
         navigator.getUserMedia({ video: true, audio: false }, function (stream) {
             video.srcObject = stream;
             _this.recorder = new MediaRecorder(stream);
@@ -3936,12 +3936,10 @@ riot.tag2('app', '<div class="viewArea"> <video autoplay="1"></video> </div> <di
         this.isFullscreen = !_screenfull2.default.isFullscreen;
     }.bind(this);
     this.startRecording = function (e) {
-        console.log('rec');
         this.recorder.start();
         this.currentPage = this.PAGE.REC;
     }.bind(this);
     this.stopRecording = function (e) {
-        console.log('stop');
         this.recorder.stop();
         this.currentPage = this.PAGE.CONFIRM;
     }.bind(this);
@@ -4009,9 +4007,7 @@ riot.tag2('app', '<div class="viewArea"> <video autoplay="1"></video> </div> <di
             this.currentListIndex--;
         } else if (direction === this.DIRECTION.NEXT && this.existNext()) {
             this.currentListIndex++;
-        } else {
-            console.log('unknown direction');
-        }
+        } else {}
     }.bind(this);
     this.existPrev = function () {
         if (this.list.length <= 1) return false;
@@ -4022,7 +4018,6 @@ riot.tag2('app', '<div class="viewArea"> <video autoplay="1"></video> </div> <di
         if (this.currentListIndex === this.list.length - 1) return false;else return true;
     }.bind(this);
     this.mirror = function (e) {
-        console.log('mirror');
         this.currentPage = this.PAGE.MIRROR;
     }.bind(this);
     this.back = function (e) {
@@ -4035,13 +4030,21 @@ riot.tag2('app', '<div class="viewArea"> <video autoplay="1"></video> </div> <di
         var ratio = dx / rect.width;
         if (ratio < 0) ratio = 0;else if (ratio > 1) ratio = 1;
         this.refs.progress.style.width = ratio * 100 + '%';
+        this.refs.playingVideo.style.opacity = ratio;
     }.bind(this);
     this.play = function (e) {
-        console.log('play');
+        var _this3 = this;
+
+        var video = this.refs.playingVideo;
+        video.play();
         this.isPlaying = true;
+        video.onended = function () {
+            video.pause();
+            _this3.update({ isPlaying: false });
+        };
     }.bind(this);
     this.pause = function (e) {
-        console.log('pause');
+        this.refs.playingVideo.pause();
         this.isPlaying = false;
     }.bind(this);
 });

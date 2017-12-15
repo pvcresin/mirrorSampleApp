@@ -18,9 +18,10 @@ const getDate = filename => {
 }
 
 const app = express()
+const storagePath = 'public/videos'
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, 'public/videos')
+		cb(null, storagePath)
 	},
 	filename: (req, file, cb) => {
 		const time = moment().format('YYYY-MM-DD-HH-mm-ss')
@@ -32,13 +33,22 @@ const upload = multer({ storage: storage })
 app
 	.use(express.static('public'))
 	.get('/', (req, res, next) => {
-		res.send("Hello")
+		res.send('Hello')
 	})
-	.post('/upload', upload.single('video'), (req, res) => {
+	.get('/delete', (req, res, next) => {
+		fs.readdir(storagePath, (err, files) => {
+			if (err) throw err
+			files.forEach(file => {
+				fs.unlinkSync(`${storagePath}/${file}`)
+			})
+			return res.send('ok')
+		})
+	})
+	.post('/upload', upload.single('video'), (req, res, next) => {
 		res.send('Success')
 	})
 	.get('/list', (req, res, next) => {
-		fs.readdir('public/videos', (err, files) => {
+		fs.readdir(storagePath, (err, files) => {
 			if (err) throw err
 			res.json(files.map(filename => {
 				return {

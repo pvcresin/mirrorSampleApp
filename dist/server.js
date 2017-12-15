@@ -103,9 +103,10 @@ const getDate = filename => {
 };
 
 const app = (0, _express2.default)();
+const storagePath = 'public/videos';
 const storage = _multer2.default.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, 'public/videos');
+		cb(null, storagePath);
 	},
 	filename: (req, file, cb) => {
 		const time = (0, _moment2.default)().format('YYYY-MM-DD-HH-mm-ss');
@@ -115,11 +116,19 @@ const storage = _multer2.default.diskStorage({
 const upload = (0, _multer2.default)({ storage: storage });
 
 app.use(_express2.default.static('public')).get('/', (req, res, next) => {
-	res.send("Hello");
-}).post('/upload', upload.single('video'), (req, res) => {
+	res.send('Hello');
+}).get('/delete', (req, res, next) => {
+	_fs2.default.readdir(storagePath, (err, files) => {
+		if (err) throw err;
+		files.forEach(file => {
+			_fs2.default.unlinkSync(`${storagePath}/${file}`);
+		});
+		return res.send('ok');
+	});
+}).post('/upload', upload.single('video'), (req, res, next) => {
 	res.send('Success');
 }).get('/list', (req, res, next) => {
-	_fs2.default.readdir('public/videos', (err, files) => {
+	_fs2.default.readdir(storagePath, (err, files) => {
 		if (err) throw err;
 		res.json(files.map(filename => {
 			return {

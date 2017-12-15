@@ -1,6 +1,10 @@
 App
 	.viewArea
-		video(autoplay='1')
+		video.mirrorVideo(autoplay='1')
+		video.playingVideo(
+			if='{this.currentPage === this.PAGE.MIRROR}'
+			ref='playingVideo'
+			src='{getSelectedVideoSrc()}')
 	.controlArea
 		.toolbar(if='{this.currentPage === this.PAGE.TOP}')
 			.open(click='{open}')
@@ -63,7 +67,6 @@ App
 							.progress(ref='progress')
 				.videoIcon
 					i.fa.fa-film(aria-hidden='true')
-
 			.play(if='{!this.isPlaying}' click='{play}')
 				.iconBox
 					i.fa.fa-play(aria-hidden='true')
@@ -101,7 +104,7 @@ App
 		this.on('mount', () => {
 			console.log('mounted', opts)
 
-			const video = document.querySelector('video')
+			const video = document.querySelector('.mirrorVideo')
 			navigator.getUserMedia(
 				{ video: true, audio: false },
 				stream => {
@@ -144,12 +147,10 @@ App
 			this.isFullscreen = !screenfull.isFullscreen
 		}
 		startRecording(e) {
-			console.log('rec')
 			this.recorder.start()
 			this.currentPage = this.PAGE.REC
 		}
 		stopRecording(e) {
-			console.log('stop')
 			this.recorder.stop()
 			this.currentPage = this.PAGE.CONFIRM
 		}
@@ -216,7 +217,6 @@ App
 			} else if (direction === this.DIRECTION.NEXT && this.existNext()) {
 				this.currentListIndex++
 			} else {
-				console.log('unknown direction')
 			}
 		}
 		existPrev() {
@@ -230,7 +230,6 @@ App
 			else return true
 		}
 		mirror(e) {
-			console.log('mirror')
 			this.currentPage = this.PAGE.MIRROR
 		}
 		back(e) {
@@ -244,12 +243,18 @@ App
 			if (ratio < 0) ratio = 0
 			else if (ratio > 1) ratio = 1
 			this.refs.progress.style.width = (ratio * 100) + '%'
+			this.refs.playingVideo.style.opacity = ratio
 		}
 		play(e) {
-			console.log('play')
+			const video = this.refs.playingVideo
+			video.play()
 			this.isPlaying = true
+			video.onended = () => {
+				video.pause()
+				this.update({ isPlaying: false })
+			}
 		}
 		pause(e) {
-			console.log('pause')
+			this.refs.playingVideo.pause()
 			this.isPlaying = false
 		}
