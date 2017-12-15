@@ -12,7 +12,6 @@
     "font-awesome": "^4.7.0",
     "font-awesome-webpack": "^0.0.5-beta.2",
     "less": "^2.7.3",
-    "live-server": "^1.2.0",
     "nodemon": "^1.13.2",
     "npm-run-all": "^4.0.2",
     "postcss-cli": "^4.1.0",
