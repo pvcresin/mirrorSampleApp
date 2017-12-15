@@ -2,25 +2,43 @@ const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
-	entry: {
-		app: path.join(__dirname, 'src/js/app.js')
-	},
+	entry: path.join(__dirname, 'src/index.js'),
 	output: {
-		path: path.join(__dirname, 'dist/js/'),
-		filename: '[name].js'
+		path: path.join(__dirname, 'dist/'),
+		filename: 'index.js'
 	},
 	module: {
-		loaders: [{
-			test: /\.js$/,
+		rules: [{
+			test: /\.tag$/,
+			enforce: 'pre',
 			exclude: /node_modules/,
-			loader: 'babel-loader',
-			query: {
-				presets: ['es2015']
+			loader: 'tag-pug-loader'
+		}, {
+			test: /\.js|\.tag$/,
+			enforce: 'post',
+			exclude: /node_modules/,
+			use: {
+				loader: 'babel-loader',
+				query: {
+					presets: ['es2015-riot']
+				}
 			}
+		}, {
+			test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
+			use: {
+				loader: 'url-loader',
+				query: {
+					limit: 10000,
+					mimetype: 'application/font-woff'
+				}
+			}
+		}, {
+			test: /\.(ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+			loader: 'file-loader'
 		}]
 	},
 	resolve: {
-		extensions: ['.js']
+		extensions: ['.js', '.tag', '.woff', 'woff2', '.ttf', '.eot', '.svg']
 	},
 	plugins: [
 		new webpack.DefinePlugin({

@@ -1,0 +1,77 @@
+$controlAreaHeight: 14rem;
+$controlAreaPaddingSide: 2rem;
+$toolbarHeight: 4rem;
+
+* {
+	box-sizing: border-box;
+}
+
+body, p, h1, h2, h3, h4, h5, h6, img, video {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	// background: black;
+	& main {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		& .viewArea {
+			width: 100%;
+			background: black;
+			flex-grow: 1;
+			display: flex;
+			& video {
+				flex-grow: 1;
+				max-width: 100%;
+			}
+		}
+		& .controlArea {
+			$controlAreaColor: lightgray;
+			background: $controlAreaColor;
+			width: 100%;
+			height: $controlAreaHeight;
+			display: flex;
+			padding: 0 $controlAreaPaddingSide;
+			$controlAreaWidth: calc(100vw - 2 * $controlAreaPaddingSide);
+			$unit: calc($controlAreaWidth / 7);
+			& .toolbar {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				justify-content: space-between;
+				& > div {
+					// border: 1px solid;
+					width: $unit;
+					height: 100%;
+					& .iconBox {
+						width: 100%;
+						height: $unit;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						$iconColor: #565656;
+						& i {
+							font-size: calc($unit * 0.8);
+							color: $iconColor;
+							&.fa-circle {
+								color: red;
+							}
+						}
+						& > div {
+							width: 80%;
+							height: 80%;
+							background: $iconColor;
+							background: red;
+							border-radius: 50%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						}
+					}
+				}
+			}
+		}
+	}
+}
