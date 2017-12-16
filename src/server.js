@@ -7,7 +7,7 @@ import https from 'https'
 moment.locale('ja')
 
 const options = {
-	pfx: fs.readFileSync("../test.pfx"),
+	pfx: fs.readFileSync("src/test.pfx"),
 	passphrase: "0000"
 }
 

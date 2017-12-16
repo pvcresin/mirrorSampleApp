@@ -95,7 +95,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _moment2.default.locale('ja');
 
 const options = {
-	pfx: _fs2.default.readFileSync("../test.pfx"),
+	pfx: _fs2.default.readFileSync("src/test.pfx"),
 	passphrase: "0000"
 };
 

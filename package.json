@@ -35,7 +35,7 @@
     "webrtc-adapter": "^6.0.3"
   },
   "scripts": {
-    "copy": "copy mirror.svg public",
+    "copy": "copy src\\mirror.svg public",
     "prebuild": "npm run copy",
     "build": "npm-run-all build:*",
     "build:js": "webpack",

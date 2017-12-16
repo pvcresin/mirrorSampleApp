@@ -41,10 +41,10 @@ App
 				.iconBox
 					i.fa.fa-chevron-circle-left(aria-hidden='true')
 			.selectView(if='{list.length === 0}')
-				.videoContainer(ref='videoContainer')
+				.videoContainer
 					.message No Video...
-			.selectView(if='{list.length > 0}' click='{mirror}')
-				.videoContainer(ref='videoContainer')
+			.selectView(if='{list.length > 0}' click='{mirror}' ref='selectView')
+				.videoContainer
 					video(src='{getSelectedVideoSrc()}')
 					.info
 						p {this.getDate()}
@@ -126,7 +126,7 @@ App
 		this.on('updated', () => {
 			if (this.currentPage === this.PAGE.SELECT) {
 				if (!this.isSwipeListener) {
-					const hammer = new Hammer(this.refs.videoContainer)
+					const hammer = new Hammer(this.refs.selectView)
 					hammer.on('swipe', e => {
 						if (e.deltaX > 0) {	// ->
 							this.updateVideoSelector(this.DIRECTION.PREV)
