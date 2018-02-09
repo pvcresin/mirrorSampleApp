@@ -31,7 +31,6 @@
     "multer": "^1.3.0",
     "riot": "^3.7.4",
     "screenfull": "^3.3.2",
-    "swiper": "^4.0.7",
     "webrtc-adapter": "^6.0.3"
   },
   "scripts": {

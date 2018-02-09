@@ -95,8 +95,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _moment2.default.locale('ja');
 
 const options = {
-	pfx: _fs2.default.readFileSync("src/test.pfx"),
-	passphrase: "0000"
+	pfx: _fs2.default.readFileSync('src/test.pfx'),
+	passphrase: '0000'
 };
 
 const getDate = filename => {
@@ -148,11 +148,11 @@ app.use(_express2.default.static('public')).use(_express2.default.static(storage
 	});
 });
 // .listen(3000, () => {
-// 	console.log("URL -> localhost:3000")
-// })
+// 	console.log('URL -> localhost:3000')
+// })'
 
 _https2.default.createServer(options, app).listen(3000, () => {
-	console.log("URL -> localhost:3000");
+	console.log('URL -> localhost:3000');
 });
 
 /***/ }),

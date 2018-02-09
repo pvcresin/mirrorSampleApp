@@ -7,8 +7,8 @@ import https from 'https'
 moment.locale('ja')
 
 const options = {
-	pfx: fs.readFileSync("src/test.pfx"),
-	passphrase: "0000"
+	pfx: fs.readFileSync('src/test.pfx'),
+	passphrase: '0000'
 }
 
 const getDate = filename => {
@@ -66,9 +66,9 @@ app
 		})
 	})
 // .listen(3000, () => {
-// 	console.log("URL -> localhost:3000")
-// })
+// 	console.log('URL -> localhost:3000')
+// })'
 
 https.createServer(options, app).listen(3000, () => {
-	console.log("URL -> localhost:3000")
+	console.log('URL -> localhost:3000')
 })

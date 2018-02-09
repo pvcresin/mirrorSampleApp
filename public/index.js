@@ -3986,7 +3986,7 @@ riot.tag2('app', '<div class="viewArea"> <video class="mirrorVideo" autoplay="1"
                 _this2.list = [];
                 _this2.currentListIndex = -1;
             } else {
-                _this2.list = videos;
+                _this2.list = videos.reverse();
                 _this2.currentListIndex = 0;
             }
             _this2.update();

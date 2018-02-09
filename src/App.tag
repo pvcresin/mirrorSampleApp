@@ -80,7 +80,6 @@ App
 	script.
 		import 'webrtc-adapter'
 		import 'hammerjs'
-		//- import Swiper from 'swiper' // scrollbar swipe
 		import screenfull from 'screenfull'
 
 		this.PAGE = {
@@ -198,7 +197,7 @@ App
 					this.list = []
 					this.currentListIndex = -1
 				} else {
-					this.list = videos
+					this.list = videos.reverse()
 					this.currentListIndex = 0
 				}
 				this.update()
