@@ -4021,6 +4021,7 @@ riot.tag2('app', '<div class="viewArea"> <video class="mirrorVideo" autoplay="1"
     }.bind(this);
     this.back = function (e) {
         console.log('back');
+        this.isPlaying = false;
         this.currentPage = this.PAGE.SELECT;
     }.bind(this);
     this.changeProgress = function (e) {

@@ -235,6 +235,7 @@ App
 		}
 		back(e) {
 			console.log('back')
+			this.isPlaying = false
 			this.currentPage = this.PAGE.SELECT
 		}
 		changeProgress(e) {
