@@ -1,3 +1,5 @@
+videos/*.webm
+
 # Logs
 logs
 *.log
