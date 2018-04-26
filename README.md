@@ -21,7 +21,7 @@
 
 - Windows 10 (64bit)
 	- Node.js (v8.8.0)
-	- npm (v1.0.2)
+	- Yarn (v1.0.2)
 - Galaxy S6 edge
 
 # 使う
@@ -33,7 +33,7 @@
 		1. ソースを解凍する
 		1. PCの ローカルIPアドレス を調べておく
 		1. コマンドプロンプトやターミナルで、このREADME.mdがある階層まで移動します
-			- `cd`(Change Directory)コマンドを使用します
+			- `cd` (Change Directory)コマンドを使用します
 			- 階層が`C:/Users/Asahi/Desktop/mirrorSampleApp`であった場合
 			- `cd C:/Users/Asahi/Desktop`を実行
 			- 画面に左に表示されている階層が`C:/Users/Asahi/Desktop`になっていることを確認します
