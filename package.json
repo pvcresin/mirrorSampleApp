@@ -27,6 +27,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "hammerjs": "^2.0.8",
+    "make-dir": "^1.2.0",
     "moment": "^2.19.4",
     "multer": "^1.3.0",
     "riot": "^3.7.4",

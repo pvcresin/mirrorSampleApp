@@ -1,10 +1,17 @@
 import fs from 'fs'
+import makeDir from 'make-dir'
 import express from 'express'
 import multer from 'multer'
 import moment from 'moment'
 import https from 'https'
 
 moment.locale('ja')
+
+makeDir('./videos').then(path => {
+	console.log(`videos: ${path}`)
+}).catch(err => {
+	console.log(err)
+})
 
 const options = {
 	pfx: fs.readFileSync('src/test.pfx'),
@@ -34,6 +41,7 @@ const storage = multer.diskStorage({
 		cb(null, time + '.webm')
 	}
 })
+
 const upload = multer({ storage: storage })
 
 app
@@ -65,9 +73,6 @@ app
 			}))
 		})
 	})
-// .listen(3000, () => {
-// 	console.log('URL -> localhost:3000')
-// })'
 
 https.createServer(options, app).listen(3000, () => {
 	console.log('URL -> localhost:3000')

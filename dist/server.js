@@ -74,25 +74,35 @@ var _fs = __webpack_require__(1);
 
 var _fs2 = _interopRequireDefault(_fs);
 
-var _express = __webpack_require__(2);
+var _makeDir = __webpack_require__(3);
+
+var _makeDir2 = _interopRequireDefault(_makeDir);
+
+var _express = __webpack_require__(4);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _multer = __webpack_require__(3);
+var _multer = __webpack_require__(5);
 
 var _multer2 = _interopRequireDefault(_multer);
 
-var _moment = __webpack_require__(4);
+var _moment = __webpack_require__(6);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _https = __webpack_require__(5);
+var _https = __webpack_require__(7);
 
 var _https2 = _interopRequireDefault(_https);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _moment2.default.locale('ja');
+
+(0, _makeDir2.default)('./videos').then(path => {
+	console.log(`videos: ${path}`);
+}).catch(err => {
+	console.log(err);
+});
 
 const options = {
 	pfx: _fs2.default.readFileSync('src/test.pfx'),
@@ -122,6 +132,7 @@ const storage = _multer2.default.diskStorage({
 		cb(null, time + '.webm');
 	}
 });
+
 const upload = (0, _multer2.default)({ storage: storage });
 
 app.use(_express2.default.static('public')).use(_express2.default.static(storagePath)).get('/', (req, res, next) => {
@@ -147,9 +158,6 @@ app.use(_express2.default.static('public')).use(_express2.default.static(storage
 		}));
 	});
 });
-// .listen(3000, () => {
-// 	console.log('URL -> localhost:3000')
-// })'
 
 _https2.default.createServer(options, app).listen(3000, () => {
 	console.log('URL -> localhost:3000');
@@ -162,25 +170,32 @@ _https2.default.createServer(options, app).listen(3000, () => {
 module.exports = require("fs");
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("express");
-
-/***/ }),
+/* 2 */,
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("multer");
+module.exports = require("make-dir");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("moment");
+module.exports = require("express");
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("multer");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("moment");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("https");
